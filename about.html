@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Footer</title>
+<style>
+  body {
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background:#f4f4f4;
+  }
+
+  footer {
+    background:#111;
+    color:#fff;
+    padding:40px 20px;
+  }
+
+  .footer-container {
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:30px;
+    justify-content:space-between;
+  }
+
+  .footer-section {
+    flex:1 1 200px;
+    min-width:200px;
+  }
+
+  .footer-section h4 {
+    font-size:16px;
+    margin-bottom:12px;
+    font-weight:600;
+  }
+
+  .footer-section p, 
+  .footer-section a {
+    font-size:14px;
+    line-height:1.6;
+    color:#ccc;
+    text-decoration:none;
+  }
+
+  .footer-section a:hover {
+    color:#fff;
+  }
+
+  .footer-section .email {
+    display:inline-block;
+    margin-top:12px;
+    background:#222;
+    padding:8px 12px;
+    border-radius:4px;
+  }
+
+  .footer-bottom {
+    text-align:center;
+    margin-top:30px;
+    font-size:12px;
+    color:#888;
+    border-top:1px solid #333;
+    padding-top:20px;
+  }
+
+  @media (max-width:768px){
+    .footer-container {
+      flex-direction:column;
+      gap:20px;
+    }
+    .footer-section {
+      min-width:100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-section">
+      <h4>About Us</h4>
+      <p>MyAadhaarUIDAI.com provides essential guidance on Aadhaar and UIDAI services, offering clear, concise information to navigate Aadhaar-related processes effectively.</p>
+      <a href="mailto:support@myaadhaaruidai.com" class="email">✉ support@myaadhaaruidai.com</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Site Links</h4>
+      <p><a href="#">Disclaimer</a></p>
+      <p><a href="#">Privacy Policy</a></p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Top Links</h4>
+      <p><a href="#">Aadhaar Download</a></p>
+      <p><a href="#">Aadhaar Card Status</a></p>
+      <p><a href="#">Aadhaar Enrolment</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    Disclaimer: This is not the official website of the Unique Identification Authority of India (UIDAI). It offers general guidance and information on Aadhaar-related services but is not affiliated with, endorsed by, or operated by UIDAI. For accurate, secure, and official Aadhaar information and services, always refer to the official UIDAI website (uidai.gov.in).
+  </div>
+</footer>
+
+</body>
+</html>
