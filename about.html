@@ -1,110 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Responsive Footer</title>
-<style>
-  body {
-    margin:0;
-    font-family: 'Poppins', sans-serif;
-    background:#f4f4f4;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - Payment Solution</title>
 
-  footer {
-    background:#111;
-    color:#fff;
-    padding:40px 20px;
-  }
-
-  .footer-container {
-    max-width:1100px;
-    margin:0 auto;
-    display:flex;
-    flex-wrap:wrap;
-    gap:30px;
-    justify-content:space-between;
-  }
-
-  .footer-section {
-    flex:1 1 200px;
-    min-width:200px;
-  }
-
-  .footer-section h4 {
-    font-size:16px;
-    margin-bottom:12px;
-    font-weight:600;
-  }
-
-  .footer-section p, 
-  .footer-section a {
-    font-size:14px;
-    line-height:1.6;
-    color:#ccc;
-    text-decoration:none;
-  }
-
-  .footer-section a:hover {
-    color:#fff;
-  }
-
-  .footer-section .email {
-    display:inline-block;
-    margin-top:12px;
-    background:#222;
-    padding:8px 12px;
-    border-radius:4px;
-  }
-
-  .footer-bottom {
-    text-align:center;
-    margin-top:30px;
-    font-size:12px;
-    color:#888;
-    border-top:1px solid #333;
-    padding-top:20px;
-  }
-
-  @media (max-width:768px){
-    .footer-container {
-      flex-direction:column;
-      gap:20px;
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #fff;
+      color: #333;
+      overflow-x: hidden;
     }
-    .footer-section {
-      min-width:100%;
+
+    /* 🔹 Header Section */
+    .header {
+      position: relative;
+      background: linear-gradient(135deg, #0093e9, #80d0c7);
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
     }
-  }
-</style>
+
+    .header h1 {
+      color: #fff;
+      font-size: 50px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      z-index: 2;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* 🔹 Logo & Back Button */
+    .header-controls {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .logo {
+      height: 110px;  /* ✅ Doubled from 55px to 110px */
+      width: auto;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+    }
+
+    .back-btn {
+      background: #ff5722;
+      color: #fff;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background: #ff784e;
+      transform: scale(1.05);
+    }
+
+    /* 🔹 Animated Shapes */
+    .shape {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      opacity: 0.8;
+      animation: move 10s linear infinite;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+    }
+
+    .tri { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); background: rgba(255,255,255,0.7); }
+    .circle { border-radius: 50%; background: rgba(255,255,255,0.5); }
+    .square { background: rgba(255,255,255,0.6); }
+    .zigzag {
+      width: 70px;
+      height: 15px;
+      background: repeating-linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.7) 5px, transparent 5px, transparent 10px);
+      animation: move 12s linear infinite reverse;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: 0.9; animation: move 8s linear infinite; }
+
+    @keyframes move {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-50px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+
+    /* 🔹 Who We Are Section */
+    .about-section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      color: #0b74c6;
+      font-size: 34px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .about-content {
+      max-width: 1000px;
+      margin: 50px auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+    }
+
+    .about-content img {
+      width: 420px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 280px;
+      text-align: left;
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    /* 🔹 Team Section */
+    .team-section {
+      text-align: center;
+      padding: 60px 20px;
+      background: #f8f9fb;
+    }
+
+    .team-section h2 {
+      font-size: 30px;
+      color: #d94f1a;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .team-section img {
+      width: 340px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .team-section p {
+      color: #555;
+      font-size: 17px;
+      max-width: 850px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* 🔹 Footer */
+    .footer {
+      background: #0b74c6;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    /* 🔹 Responsive */
+    @media (max-width: 900px) {
+      .about-content { flex-direction: column; text-align: center; gap: 30px; }
+      .about-text { text-align: center; }
+      .about-content img { width: 80%; }
+      .header h1 { font-size: 38px; }
+      .logo { height: 80px; } /* ✅ Larger logo even on tablets */
+    }
+
+    @media (max-width: 500px) {
+      .header h1 { font-size: 32px; }
+      .back-btn { padding: 6px 14px; font-size: 14px; }
+      .shape { width: 40px; height: 40px; }
+      .logo { height: 65px; } /* ✅ Large enough on mobile */
+    }
+  </style>
 </head>
 <body>
 
-<footer>
-  <div class="footer-container">
-    <div class="footer-section">
-      <h4>About Us</h4>
-      <p>MyAadhaarUIDAI.com provides essential guidance on Aadhaar and UIDAI services, offering clear, concise information to navigate Aadhaar-related processes effectively.</p>
-      <a href="mailto:support@myaadhaaruidai.com" class="email">✉ support@myaadhaaruidai.com</a>
+  <!-- 🔹 Header with Logo & Back Button -->
+  <div class="header">
+    <div class="header-controls">
+      <img src="BMW.png" alt="Logo" class="logo">
+      <a href="login.html" class="back-btn">Back</a>
     </div>
+    <h1>ABOUT US</h1>
 
-    <div class="footer-section">
-      <h4>Site Links</h4>
-      <p><a href="#">Disclaimer</a></p>
-      <p><a href="#">Privacy Policy</a></p>
-    </div>
-
-    <div class="footer-section">
-      <h4>Top Links</h4>
-      <p><a href="#">Aadhaar Download</a></p>
-      <p><a href="#">Aadhaar Card Status</a></p>
-      <p><a href="#">Aadhaar Enrolment</a></p>
-    </div>
+    <!-- Animated Shapes -->
+    <div class="shape tri" style="top: 20px; left: 30px;"></div>
+    <div class="shape circle" style="top: 80px; right: 50px; animation-delay: 1s;"></div>
+    <div class="shape square" style="bottom: 40px; left: 60px; animation-delay: 2s;"></div>
+    <div class="shape zigzag" style="top: 50px; left: 200px; animation-delay: 3s;"></div>
+    <div class="shape dot" style="bottom: 70px; right: 100px; animation-delay: 4s;"></div>
+    <div class="shape tri" style="bottom: 30px; right: 40px; animation-delay: 5s;"></div>
   </div>
 
-  <div class="footer-bottom">
-    Disclaimer: This is not the official website of the Unique Identification Authority of India (UIDAI). It offers general guidance and information on Aadhaar-related services but is not affiliated with, endorsed by, or operated by UIDAI. For accurate, secure, and official Aadhaar information and services, always refer to the official UIDAI website (uidai.gov.in).
+  <!-- 🔹 Who We Are -->
+  <section class="about-section">
+    <h2>Who We Are</h2>
+    <div class="about-content">
+      <img src="a.jpeg" alt="Aadhaar Service Image">
+      <div class="about-text">
+        <p>
+          <strong>PAYMENT SOLUTION</strong> is a trusted digital service provider offering secure and authorized <strong>Aadhaar-based solutions</strong>.  
+          We enable users to perform <strong>Aadhaar enrollment, biometric authentication, and update services</strong> seamlessly.
+        </p>
+        <p>
+          Our company works with authorized centers to make the Aadhaar update process easier and faster. We ensure every transaction is safe, transparent, and aligned with UIDAI guidelines.
+        </p>
+        <p>
+          At <strong>Payment Solution</strong>, we aim to empower citizens and retailers through smart, technology-driven Aadhaar and financial service platforms.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔹 Creative Team Section -->
+  <section class="team-section">
+    <h2>Our Creative Team</h2>
+    <img src="b.jpeg" alt="Creative Team Image">
+    <p>
+      The <strong>Payment Solution</strong> team brings together professionals from IT, finance, and government service backgrounds.  
+      We constantly innovate to make Aadhaar-related and digital payment processes smoother, reliable, and more accessible across India.
+    </p>
+  </section>
+
+  <!-- 🔹 Footer -->
+  <div class="footer">
+    © 2025 PAYMENT SOLUTION | All Rights Reserved | Contact: [Your Contact Here]
   </div>
-</footer>
 
 </body>
 </html>
