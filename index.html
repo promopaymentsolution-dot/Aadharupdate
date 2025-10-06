@@ -19,9 +19,9 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ✅ Fullscreen background */
+    /* ✅ Background with soft shadow */
     body {
-      background: var(--panel-bg);
+      background: linear-gradient(180deg, #ffffff, #f2f6fb);
       color: var(--muted);
       width: 100%;
       height: 100vh;
@@ -29,15 +29,13 @@
       flex-direction: column;
     }
 
-    /* ✅ Container now full width + height */
     .container {
       flex: 1;
       display: flex;
       flex-direction: column;
-      background: linear-gradient(180deg, #fff, #f7f7f7);
     }
 
-    /* top blue bar */
+    /* Top blue bar */
     .topbar {
       background: var(--blue);
       color: #fff;
@@ -47,23 +45,47 @@
       justify-content: space-between;
     }
 
-    .topbar .title {
+    .title {
       font-weight: 700;
       font-size: 16px;
       letter-spacing: 0.6px;
     }
 
-    .search-icon {
-      width: 22px; height: 22px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+    /* Moving welcome text */
+    .marquee {
+      background: #f8f8f8;
+      color: red;
+      font-weight: 600;
+      padding: 6px 0;
+      font-size: 15px;
+      overflow: hidden;
+      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    /* ✅ Main takes full remaining height */
+    .marquee span {
+      display: inline-block;
+      animation: scrollText 15s linear infinite;
+    }
+
+    @keyframes scrollText {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    /* ✅ Logo section */
+    .logo-section {
+      text-align: center;
+      padding: 20px 0 0 0;
+    }
+
+    .logo-section img {
+      width: 160px;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    /* ✅ Main content area */
     .main {
       flex: 1;
       display: flex;
@@ -83,9 +105,7 @@
       width: 480px;
       max-width: 90%;
       height: auto;
-      /* background: #fff; */
       border: 1px solid #ddd;
-      /* box-shadow: 0 6px 16px rgba(0,0,0,0.1); */
       margin-bottom: 10px;
       border-radius: 6px;
       object-fit: contain;
@@ -138,6 +158,25 @@
       border: 1px solid #bbb;
       border-radius: 4px;
       font-size: 15px;
+    }
+
+    /* ✅ Captcha area */
+    .captcha-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .captcha {
+      background: #e7e7e7;
+      border: 1px solid #999;
+      padding: 8px 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-radius: 4px;
+      user-select: none;
+      font-size: 16px;
     }
 
     .fingerprint-wrap {
@@ -208,6 +247,7 @@
       font-size: 13px;
       padding: 8px 12px;
       text-align: center;
+      line-height: 1.6;
     }
 
     /* ✅ Responsive */
@@ -236,9 +276,20 @@
 </head>
 <body>
   <div class="container">
+
     <div class="topbar">
       <div class="title">UCL CSC AADHAAR</div>
-      <div class="search-icon">🔍</div>
+      <div>🔍</div>
+    </div>
+
+    <!-- Moving text -->
+    <div class="marquee">
+      <span>Welcome to UCL CSC Aadhaar Portal — Secure Access for Registered Operators Only</span>
+    </div>
+
+    <!-- Logo below moving text -->
+    <div class="logo-section">
+      <img src="BMW.png" alt="UCL Logo" />
     </div>
 
     <div class="main">
@@ -246,7 +297,7 @@
         <img src="adhar.png" class="aadhaar-img" alt="Aadhaar Logo" />
         <div class="brand-title">AADHAAR</div>
         <div class="brand-small">Enrolment Update Client (Lite Edition)</div>
-        <div class="brand-small">version 3.3.0.0</div>
+        <div class="brand-small">Version 3.3.0.0</div>
       </div>
 
       <div class="right">
@@ -256,6 +307,13 @@
 
           <label>Password</label>
           <input type="password" id="pwd" placeholder="Enter Password" />
+
+          <!-- Captcha -->
+          <div class="captcha-box">
+            <div class="captcha" id="captchaCode"></div>
+            <input type="text" id="captchaInput" placeholder="Enter Code" />
+            <button class="btn" onclick="generateCaptcha()">↻</button>
+          </div>
 
           <div class="btn-row">
             <button class="btn" id="cancelBtn">Cancel</button>
@@ -275,22 +333,41 @@
     </div>
 
     <div class="footer-bar">
-      © UID Authority of India | TO GET NEW ID WHATSAPP ME ON xxx-xxx-xxxx
+      © UID Authority of India | TO GET NEW ID WHATSAPP ME ON +91-8058998872<br>
+      Helpline:8058998872
     </div>
   </div>
 
   <script>
-    const VALID_UID = "RT9006262";   // change as needed
-    const VALID_PASS = "Pass@1234";   // change as needed
+    const VALID_UID = "RT9006262";
+    const VALID_PASS = "Pass@1234";
+
+    function generateCaptcha() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      let code = "";
+      for (let i = 0; i < 6; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+      document.getElementById("captchaCode").textContent = code;
+    }
+
+    generateCaptcha();
 
     document.getElementById("loginBtn").onclick = function() {
       const uid = document.getElementById("uid").value.trim();
       const pwd = document.getElementById("pwd").value.trim();
+      const inputCaptcha = document.getElementById("captchaInput").value.trim();
+      const actualCaptcha = document.getElementById("captchaCode").textContent.trim();
       const msg = document.getElementById("msg");
 
-      if (!uid || !pwd) {
-        msg.textContent = "Please enter both UID and Password.";
+      if (!uid || !pwd || !inputCaptcha) {
+        msg.textContent = "Please fill all fields including captcha.";
         msg.style.color = "red";
+        return;
+      }
+
+      if (inputCaptcha !== actualCaptcha) {
+        msg.textContent = "Invalid Captcha Code.";
+        msg.style.color = "red";
+        generateCaptcha();
         return;
       }
 
@@ -307,7 +384,9 @@
     document.getElementById("cancelBtn").onclick = function() {
       document.getElementById("uid").value = "";
       document.getElementById("pwd").value = "";
+      document.getElementById("captchaInput").value = "";
       document.getElementById("msg").textContent = "";
+      generateCaptcha();
     };
   </script>
 </body>
